@@ -1,0 +1,24 @@
+@model PortalAcademico.Models.Curso
+
+<h2>@Model.Nombre</h2>
+
+<p>Créditos: @Model.Creditos</p>
+<p>Cupo: @Model.CupoMaximo</p>
+
+<a class="btn btn-success"
+   asp-controller="Matriculas"
+   asp-action="Inscribirse"
+   asp-route-cursoId="@Model.Id">
+   Inscribirse
+</a>
+
+<a class="btn btn-secondary" asp-action="Index">
+    Volver
+</a>
+
+@if (TempData["Error"] != null)
+{
+    <div class="alert alert-danger">
+        @TempData["Error"]
+    </div>
+}

@@ -1,12 +1,25 @@
-@model IEnumerable<Curso>
+@model IEnumerable<PortalAcademico.Models.Curso>
 
-<h2>Catálogo</h2>
+<h2>Catálogo de Cursos</h2>
+
+<form method="get">
+    <input type="text" name="nombre" placeholder="Nombre" />
+    <input type="number" name="minCred" placeholder="Min créditos" />
+    <input type="number" name="maxCred" placeholder="Max créditos" />
+    <button type="submit">Filtrar</button>
+</form>
+
+<hr />
 
 @foreach (var c in Model)
 {
-    <div>
+    <div class="card mb-3 p-2">
         <h4>@c.Nombre</h4>
         <p>Créditos: @c.Creditos</p>
-        <a asp-action="Details" asp-route-id="@c.Id">Ver</a>
-    </div>
+        <a class="btn btn-primary"
+           asp-action="Details"
+           asp-route-id="@c.Id">
+           Ver detalle
+        </a>
+    </div> 
 }
