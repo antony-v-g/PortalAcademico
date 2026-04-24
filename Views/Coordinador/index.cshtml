@@ -1,0 +1,25 @@
+@model IEnumerable<Curso>
+
+<h2>Panel de Coordinador</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Créditos</th>
+            <th>Cupo</th>
+            <th>Activo</th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var c in Model)
+{
+        <tr>
+            <td>@c.Nombre</td>
+            <td>@c.Creditos</td>
+            <td>@c.CupoMaximo</td>
+            <td>@c.Activo</td>
+        </tr>
+}
+    </tbody>
+</table>
