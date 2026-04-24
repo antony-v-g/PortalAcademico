@@ -1,7 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Http; // 👈 NECESARIO para Session
 using PortalAcademico.Data;
 using PortalAcademico.Models;
+using System.Linq;
+using System.Threading.Tasks;
 
 public class CursosController : Controller
 {
@@ -13,7 +16,7 @@ public class CursosController : Controller
     }
 
     // 📌 LISTADO CON FILTROS
-    public async Task<IActionResult> Index(string nombre, int? minCred, int? maxCred)
+    public async Task<IActionResult> Index(string? nombre, int? minCred, int? maxCred)
     {
         var cursos = _context.Cursos.Where(c => c.Activo);
 
@@ -21,10 +24,10 @@ public class CursosController : Controller
             cursos = cursos.Where(c => c.Nombre.Contains(nombre));
 
         if (minCred.HasValue)
-            cursos = cursos.Where(c => c.Creditos >= minCred);
+            cursos = cursos.Where(c => c.Creditos >= minCred.Value);
 
         if (maxCred.HasValue)
-            cursos = cursos.Where(c => c.Creditos <= maxCred);
+            cursos = cursos.Where(c => c.Creditos <= maxCred.Value);
 
         return View(await cursos.ToListAsync());
     }
@@ -41,7 +44,7 @@ public class CursosController : Controller
         if (curso == null)
             return NotFound();
 
-        // 🔥 GUARDAR ÚLTIMO CURSO EN SESIÓN (esto es lo nuevo)
+        // 🔥 GUARDAR ÚLTIMO CURSO EN SESIÓN
         HttpContext.Session.SetString("ultimoCurso", curso.Nombre);
 
         return View(curso);
