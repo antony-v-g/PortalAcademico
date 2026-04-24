@@ -1,0 +1,12 @@
+@model IEnumerable<Curso>
+
+<h2>Catálogo</h2>
+
+@foreach (var c in Model)
+{
+    <div>
+        <h4>@c.Nombre</h4>
+        <p>Créditos: @c.Creditos</p>
+        <a asp-action="Details" asp-route-id="@c.Id">Ver</a>
+    </div>
+}
