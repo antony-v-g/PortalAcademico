@@ -32,10 +32,24 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
+
+        @{
+            var ultimo = Context.Session.GetString("ultimoCurso");
+        }
+
+        @if (ultimo != null)
+        {
+            <div class="alert alert-info">
+                <strong>Último curso visitado:</strong> @ultimo
+            </div>
+        }
+
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
     </div>
 
     <footer class="border-top footer text-muted">
@@ -43,6 +57,7 @@
             &copy; 2026 - PortalAcademico - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

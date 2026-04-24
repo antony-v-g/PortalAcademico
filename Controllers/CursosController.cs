@@ -41,6 +41,9 @@ public class CursosController : Controller
         if (curso == null)
             return NotFound();
 
+        // 🔥 GUARDAR ÚLTIMO CURSO EN SESIÓN (esto es lo nuevo)
+        HttpContext.Session.SetString("ultimoCurso", curso.Nombre);
+
         return View(curso);
     }
 }
